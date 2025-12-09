@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mapa P.C.D.F - ESE</title>
+    <link rel="shortcut icon" type="imagex/png" href="image/logo3.png">
+    <link rel="stylesheet" href="src/estilo.css">
+    <script src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>
+</head>
+<body>
+
+    <header id="main-header">
+        <div class="header-lado-esquerdo">
+            <button id="btn-voltar" class="escondido">&larr; Voltar</button>
+            <button id="btn-criar-conceito" class="escondido">Criar Conceito</button>
+        </div>
+        
+        <div class="header-centro">
+            <h1 id="main-title">Pilares do 'ESE' - 4.0</h1>
+            <div class="search-container">
+                <input type="text" id="search-input" placeholder="Pesquisar conceito...">
+                <div id="search-results" class="escondido"></div>
+            </div>
+        </div>
+
+        <div class="header-lado-direito">
+            <div class="dados-container">
+                <span id="nome-arquivo-atual">Seus Pilares Dimensionais</span>
+                <div class="botoes-dados">
+                    <button id="btn-exportar" title="Baixar Backup">⬇️ Baixar</button>
+                    <button id="btn-importar" title="Importar Arquivo">⬆️ Importar</button>
+                    <input type="file" id="input-importar" accept=".json" style="display: none;">
+                </div>
+            </div>
+            
+            <button id="theme-toggle-btn">🌙</button>
+            <div class="modo-edicao-container">
+                <span>Modo Edição</span>
+                <label class="switch">
+                    <input type="checkbox" id="modo-edicao-toggle">
+                    <span class="slider round"></span>
+                </label>
+            </div>
+        </div>
+    </header>
+
+    <main id="canvas-principal"></main>
+
+    <div id="modal-geral" class="escondido">
+        <div class="modal-conteudo">
+            <span id="modal-fechar">&times;</span>
+            <div id="view-content">
+                <h2 id="view-titulo"></h2><p id="view-subtitulo"></p><hr>
+                <p><strong>Pais Diretos:</strong> <span id="view-pai"></span></p>
+                <p><strong>Definição:</strong> <span id="view-definicao"></span></p>
+                <p><strong>Conexão (geral):</strong> <span id="view-conexao"></span></p>
+                <p><strong>Aparece como filho de:</strong> <span id="view-aparicoes"></span> conceito(s).</p>
+            </div>
+            <form id="form-edicao">
+                <input type="hidden" id="edit-id">
+                <div class="form-grupo"><label for="edit-titulo">Título:</label><input type="text" id="edit-titulo" name="titulo"></div>
+                <div class="form-grupo"><label for="edit-subtitulo">Subtítulo:</label><input type="text" id="edit-subtitulo" name="subtitulo"></div>
+                <div class="form-grupo">
+                    <label>Pais (selecione um ou mais):</label>
+                    <div id="edit-pais-container" class="checkbox-container"></div>
+                </div>
+                <div class="form-grupo">
+                    <label>Imagem:</label>
+                    <img id="edit-preview-imagem" src="" alt="Prévia da imagem" class="escondido">
+                    
+                    <input type="file" id="edit-imagem-input" accept="image/*" class="escondido">
+                    
+                    <button type="button" id="btn-selecionar-imagem" class="btn-secundario">Selecionar Arquivo</button>
+                
+                    <input type="hidden" id="edit-imagem-base64" name="imagem">
+                </div>
+                <div class="form-grupo"><label for="edit-definicao">Definição:</label><textarea id="edit-definicao" name="definicao" rows="4"></textarea></div>
+                <div class="form-grupo"><label for="edit-conexao">Explicação da Conexão (geral):</label><textarea id="edit-conexao" name="explicacao_conexao" rows="3"></textarea></div>
+                <div class="form-botoes">
+                    <button type="submit" class="btn-salvar">Salvar</button>
+                    <button type="button" class="btn-excluir">Excluir</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="src/script.js"></script>
+</body>
+</html>
