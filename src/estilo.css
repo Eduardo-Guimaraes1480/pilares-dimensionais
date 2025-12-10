@@ -2,3 +2,16 @@
 @import url('css/estrutura.css');
 @import url('css/componentes.css');
 @import url('css/modal.css');
+
+.conceito {
+    /* ... seus estilos atuais ... */
+
+    /* DESABILITA SELEÇÃO DE TEXTO (CRUCIAL PARA O LONG PRESS) */
+    -webkit-user-select: none; /* Safari / Chrome Mobile */
+    -moz-user-select: none;    /* Firefox */
+    -ms-user-select: none;     /* IE/Edge */
+    user-select: none;         /* Padrão */
+
+    /* DESABILITA O MENU DE SEGURAR (Salvar imagem, Copiar, etc) NO IOS */
+    -webkit-touch-callout: none; 
+}

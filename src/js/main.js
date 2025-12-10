@@ -351,6 +351,61 @@ function adicionarToqueMobile(elemento, acaoEsquerda, acaoDireita) {
     });
 }
 
+// Exemplo de implementação robusta
+let timerLongPress;
+let isLongPress = false;
+
+// Seleciona todos os cards (ajuste o seletor conforme seu HTML)
+const cards = document.querySelectorAll('.conceito'); 
+
+cards.forEach(card => {
+    
+    // 1. O Dedo tocou na tela
+    card.addEventListener('touchstart', (e) => {
+        isLongPress = false;
+        
+        // Inicia o timer de 500ms
+        timerLongPress = setTimeout(() => {
+            isLongPress = true;
+            // AQUI CHAMA SUA FUNÇÃO DE EDITAR/DETALHES
+            // ex: abrirMenuEdicao(card.id); 
+            console.log("Long Press ativado!"); 
+            
+            // Opcional: Vibrar o celular para dar feedback tátil
+            if (navigator.vibrate) navigator.vibrate(50); 
+            
+        }, 500);
+    }, { passive: true });
+
+    // 2. O Dedo moveu (se arrastar a tela, cancela o long press)
+    card.addEventListener('touchmove', () => {
+        clearTimeout(timerLongPress);
+        isLongPress = false; 
+    }, { passive: true });
+
+    // 3. O Dedo saiu da tela
+    card.addEventListener('touchend', (e) => {
+        clearTimeout(timerLongPress); // Cancela o timer se soltar antes de 500ms
+
+        if (isLongPress) {
+            // Se foi long press, previne o clique padrão (navegação)
+            e.preventDefault(); 
+            return;
+        }
+
+        // Se NÃO foi long press, é um clique normal (Toque rápido)
+        // AQUI CHAMA SUA FUNÇÃO DE NAVEGAR/EXPANDIR
+        // ex: navegarPara(card.id);
+        console.log("Toque Rápido (Tap)");
+    });
+
+    // 4. Bloqueia o menu de contexto nativo (o menu de botão direito do navegador)
+    card.addEventListener('contextmenu', (e) => {
+        e.preventDefault();
+        return false;
+    });
+});
+
     // Import/Export
     btnExportar.addEventListener('click', () => {
         const str = JSON.stringify({ conceitos: todosConceitos }, null, 2);
