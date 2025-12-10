@@ -21,6 +21,7 @@ h1:hover { color: var(--cor-switch-ligado); }
 #main-title{
     font-size: 2rem;
     font-family: var(--fonte-titulo);
+    margin: 5px 0px 0px 40px;
 }
 
 /* SIDEBAR & HAMBURGUER */
@@ -112,3 +113,52 @@ body.menu-aberto #sidebar { transform: translateX(0); }
         max-width: none; /* Permite expandir se necessário */
     }
 }
+
+/* --- INÍCIO DA RESPONSIVIDADE (Adicione ao final do CSS) --- */
+
+@media screen and (max-width: 768px) {
+    /* 1. Ajuste do Grid Principal para Celular */
+    /* Substitua '.container-pilares' pela classe real do seu grid se for diferente */
+    .container, #container, .grid-pilares { 
+        display: flex !important;
+        flex-direction: column !important;
+        width: 100% !important;
+        padding: 10px !important;
+        box-sizing: border-box !important;
+    }
+
+    /* 2. Ajuste dos Cards (Pilares) */
+    .pilar, .card {
+        width: 100% !important;
+        margin-bottom: 20px !important; /* Espaço entre eles */
+        height: auto !important; /* Altura flexível para caber texto */
+        min-height: 150px; /* Garante um tamanho clicável */
+    }
+
+    /* 3. Ajuste de Modais (Janelas de Edição/Detalhes) */
+    .modal, .janela-edicao {
+        width: 95% !important;
+        left: 2.5% !important; /* Centraliza (100% - 95% = 5% / 2) */
+        top: 5% !important;
+        height: auto !important;
+        max-height: 90vh !important;
+        overflow-y: auto !important; /* Permite rolar se o conteúdo for grande */
+    }
+
+    /* 4. Ajuste de Fontes para não estourarem a tela */
+    h1, h2 {
+        font-size: 1.2rem !important; /* Reduz títulos gigantes */
+        word-wrap: break-word !important; /* Quebra palavras longas */
+    }
+    
+    p, span, div {
+        font-size: 1rem !important; /* Texto legível */
+    }
+
+    /* 5. Prevenção de Overflow (Barra de rolagem horizontal indesejada) */
+    body, html {
+        overflow-x: hidden !important;
+        width: 100% !important;
+    }
+}
+/* --- FIM DA RESPONSIVIDADE --- */

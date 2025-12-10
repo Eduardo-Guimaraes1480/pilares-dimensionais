@@ -55,3 +55,28 @@ body.dark-theme {
     --cor-sidebar-fundo: #1a1a1a;
     --cor-sidebar-sombra: rgba(0,0,0,0.5);
 }
+
+/* Previne estouro horizontal geral */
+body, html {
+    overflow-x: hidden;
+    max-width: 100vw;
+}
+
+/* Garante que textos longos quebrem a linha */
+.pilar-titulo, .pilar-descricao, p, span {
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    white-space: normal; /* Força quebra de linha se necessário */
+}
+
+/* Imagens responsivas (Logo, etc) */
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Inputs em formulários/modais */
+input, textarea, select {
+    max-width: 100%; /* Não deixa o input vazar do modal */
+    box-sizing: border-box;
+}

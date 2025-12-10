@@ -122,3 +122,4 @@ export function highlightConceito(conceitoId) {
         setTimeout(() => { caixa.classList.remove('highlight'); }, 2500);
     }
 }
+

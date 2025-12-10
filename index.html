@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,6 +9,7 @@
     <link rel="stylesheet" href="src/estilo.css">
     <script src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>
 </head>
+
 <body>
 
     <div id="overlay" class="escondido"></div>
@@ -17,12 +19,34 @@
             <h2>Menu de Controle</h2>
             <button id="btn-fechar-sidebar">&times;</button>
         </div>
-        
+
         <div class="sidebar-content">
             <div class="sidebar-section">
                 <h3>Ações</h3>
                 <button id="btn-voltar" class="btn-sidebar escondido">⬅️ Voltar</button>
                 <button id="btn-criar-conceito" class="btn-sidebar escondido">➕ Criar Conceito</button>
+            </div>
+
+            <hr class="sidebar-divider">
+
+            <div class="sidebar-section">
+                <h3>Configurações</h3>
+
+                <div class="config-item">
+                    <span>Modo Edição</span>
+                    <div class="modo-edicao-container">
+                        <label class="switch">
+                            <input type="checkbox" id="modo-edicao-toggle">
+                            <span class="slider round"></span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="config-item">
+                    <span>Tema Escuro</span>
+                    <button id="theme-toggle-btn" class="btn-icon">🌙</button>
+                </div>
+
             </div>
 
             <hr class="sidebar-divider">
@@ -35,53 +59,23 @@
                     <button id="btn-importar" class="btn-sidebar">⬆️ Importar Backup</button>
                     <input type="file" id="input-importar" accept=".json" style="display: none;">
                 </div>
+                <button id="btn-resetar" class="btn-sidebar"
+                    style="margin-top: 10px; border-color: #ff7675; color: #ff7675;">🔄 Resetar / Sair</button>
             </div>
 
             <hr class="sidebar-divider">
 
             <div class="sidebar-section">
-                <h3>Configurações</h3>
-                
-                <div class="config-item">
-                    <span>Tema Escuro</span>
-                    <button id="theme-toggle-btn" class="btn-icon">🌙</button>
-                </div>
-
-                <div class="config-item">
-                    <span>Modo Edição</span>
-                    <div class="modo-edicao-container">
-                        <label class="switch">
-                            <input type="checkbox" id="modo-edicao-toggle">
-                            <span class="slider round"></span>
-                        </label>
-                    </div>
-                </div>
-
-                <div class="sidebar-section">
-                    <h3>Sobre</h3>
-                    <a href="sobre.html" class="btn-sidebar" style="text-decoration: none;">📖 Ler Documentação</a>
-                </div>
+                <h3>Sobre</h3>
+                <a href="sobre.html" class="btn-sidebar" style="text-decoration: none;">📖 Ler Documentação</a>
             </div>
+
         </div>
-        
+
         <div class="sidebar-footer">
             <p>Versão 4.0</p>
         </div>
     </aside>
-
-    <div id="welcome-screen" class="escondido">
-        <div class="welcome-container">
-            <h1 style="font-family: 'Paradocx'; font-size: 3em; margin-bottom: 20px;">Bem-vindo ao Mapa ESE</h1>
-            <p>Você ainda não possui um universo criado neste dispositivo.</p>
-            <p style="opacity: 0.7; margin-bottom: 40px;">Utilize o botão abaixo para gerar a estrutura inicial dos Pilares Dimensionais ou importe um backup.</p>
-            
-            <button id="btn-auto-setup" class="btn-salvar" style="font-size: 1.2em; padding: 15px 30px;">🚀 Gerar Universo Padrão</button>
-            
-            <div style="margin-top: 20px;">
-                <button id="btn-welcome-import" class="btn-secundario">📂 Importar de Arquivo</button>
-            </div>
-        </div>
-    </div>
 
     <header id="main-header">
         <div class="header-left">
@@ -91,7 +85,7 @@
                 <span class="bar"></span>
             </button>
         </div>
-        
+
         <div class="header-center">
             <h1 id="main-title">P I L A R E S - D I M E N S I O N A I S</h1>
             <div class="search-container">
@@ -110,7 +104,9 @@
         <div class="modal-conteudo">
             <span id="modal-fechar">&times;</span>
             <div id="view-content">
-                <h2 id="view-titulo"></h2><p id="view-subtitulo"></p><hr>
+                <h2 id="view-titulo"></h2>
+                <p id="view-subtitulo"></p>
+                <hr>
                 <p><strong>Pais Diretos:</strong> <span id="view-pai"></span></p>
                 <p><strong>Definição:</strong> <span id="view-definicao"></span></p>
                 <p><strong>Conexão (geral):</strong> <span id="view-conexao"></span></p>
@@ -118,8 +114,10 @@
             </div>
             <form id="form-edicao">
                 <input type="hidden" id="edit-id">
-                <div class="form-grupo"><label for="edit-titulo">Título:</label><input type="text" id="edit-titulo" name="titulo"></div>
-                <div class="form-grupo"><label for="edit-subtitulo">Subtítulo:</label><input type="text" id="edit-subtitulo" name="subtitulo"></div>
+                <div class="form-grupo"><label for="edit-titulo">Título:</label><input type="text" id="edit-titulo"
+                        name="titulo"></div>
+                <div class="form-grupo"><label for="edit-subtitulo">Subtítulo:</label><input type="text"
+                        id="edit-subtitulo" name="subtitulo"></div>
                 <div class="form-grupo">
                     <label>Pais (selecione um ou mais):</label>
                     <div id="edit-pais-container" class="checkbox-container"></div>
@@ -127,15 +125,17 @@
                 <div class="form-grupo">
                     <label>Imagem:</label>
                     <img id="edit-preview-imagem" src="" alt="Prévia da imagem" class="escondido">
-                    
+
                     <input type="file" id="edit-imagem-input" accept="image/*" class="escondido">
-                    
+
                     <button type="button" id="btn-selecionar-imagem" class="btn-secundario">Selecionar Arquivo</button>
-                
+
                     <input type="hidden" id="edit-imagem-base64" name="imagem">
                 </div>
-                <div class="form-grupo"><label for="edit-definicao">Definição:</label><textarea id="edit-definicao" name="definicao" rows="4"></textarea></div>
-                <div class="form-grupo"><label for="edit-conexao">Explicação da Conexão (geral):</label><textarea id="edit-conexao" name="explicacao_conexao" rows="3"></textarea></div>
+                <div class="form-grupo"><label for="edit-definicao">Definição:</label><textarea id="edit-definicao"
+                        name="definicao" rows="4"></textarea></div>
+                <div class="form-grupo"><label for="edit-conexao">Explicação da Conexão (geral):</label><textarea
+                        id="edit-conexao" name="explicacao_conexao" rows="3"></textarea></div>
                 <div class="form-botoes">
                     <button type="submit" class="btn-salvar">Salvar</button>
                     <button type="button" class="btn-excluir">Excluir</button>
@@ -144,6 +144,47 @@
         </div>
     </div>
 
+    <div id="modal-boas-vindas" class="escondido">
+        <div class="modal-conteudo welcome-content">
+            <h2 class="welcome-title" style="font-size: 4rem;">Bem-vindo aos Pilares do ESE</h2>
+            <div class="welcome-body">
+                <p>Este é um mapa interativo para explorar e conectar conceitos filosóficos complexos.</p>
+                <ul class="welcome-list">
+                    <li class="table-row">
+                        <span class="col-label">🖱️ Clique Esquerdo</span>
+                        <span class="col-desc">Navega entre os conceitos.</span>
+                    </li>
+                    <li class="table-row">
+                        <span class="col-label">🖱️ Clique Direito</span>
+                        <span class="col-desc">Abre detalhes ou edita (se o Modo Edição estiver ativo).</span>
+                    </li>
+                    <li class="table-row">
+                        <span class="col-label">✏️ Modo Edição</span>
+                        <span class="col-desc">Ative no menu para criar, editar, mover e excluir pilares.</span>
+                    </li>
+                    <li class="table-row">
+                        <span class="col-label">💾 Dados Locais</span>
+                        <span class="col-desc">Tudo fica salvo no seu navegador. Lembre-se de fazer backup!</span>
+                    </li>
+                </ul>
+                <p>Descubra mais sobre os "PILARES" na pagina <a href="sobre.html"
+                        style="text-decoration: none; color:#8A2BE2">Sobre do site!!</a></p>
+                <p class="welcome-note">Parece que seu mapa esta vazio!! Está começando agora ou seus dados foram
+                    limpos... O que deseja fazer?</p>
+
+                <div class="welcome-actions">
+                    <button id="btn-auto-setup" class="btn-salvar btn-large">🚀 Gerar Universo (Recomendado)</button>
+                    <button id="btn-welcome-import" class="btn-secundario">📂 Importar Backup</button>
+                    <button id="btn-download-setup" class="btn-link">Baixar arquivo de Setup</button>
+                    <button id="btn-iniciar-zero" class="btn-link" style="color: #ff7675; margin-top: 5px;">⚠️ Criar do
+                        Zero (Tela Limpa)</button>
+                </div>
+            </div>
+            <button id="btn-fechar-welcome" class="btn-close-welcome">&times;</button>
+        </div>
+    </div>
+
     <script type="module" src="src/js/main.js"></script>
 </body>
+
 </html>

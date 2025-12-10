@@ -152,3 +152,238 @@
     transition: all 0.3s;
 }
 .btn-secundario:hover { border-color: var(--cor-switch-ligado); color: var(--cor-switch-ligado); }
+
+/* ==========================================================================
+   ESTILOS DO MODAL DE BOAS VINDAS (FULLSCREEN & PROFISSIONAL)
+   ========================================================================== */
+#modal-boas-vindas {
+    position: fixed; z-index: 4000;
+    left: 0; top: 0; right: 0; bottom: 0;
+    background-color: var(--cor-fundo); /* Cobre tudo com a cor de fundo do tema */
+    display: flex; justify-content: center; align-items: center;
+    padding: 20px;
+    animation: fadeIn 0.5s ease;
+}
+
+#modal-boas-vindas .welcome-content {
+    background-color: var(--cor-caixa-fundo);
+    max-width: 1000px; width: 100%;
+    border-radius: 20px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+    border: 1px solid var(--cor-input-borda);
+    padding: 50px;
+    text-align: center;
+    position: relative;
+    max-height: 50vh; overflow-y: auto;
+}
+
+.welcome-title {
+    font-family: var(--fonte-titulo);
+    font-size: 2.8em;
+    color: var(--cor-switch-ligado);
+    margin-bottom: 20px;
+    margin-top: 0;
+}
+
+.welcome-body p {
+    font-family: var(--fonte-texto);
+    font-size: 1.1em; line-height: 1.6;
+    color: var(--cor-texto);
+    margin-bottom: 30px;
+}
+
+/* Lista de instruções */
+.welcome-list {
+    text-align: left;
+    background-color: var(--cor-input-fundo);
+    padding: 25px 35px;
+    border-radius: 12px;
+    border: 1px solid var(--cor-input-borda);
+    list-style: none; margin: 30px 0;
+}
+.welcome-list li {
+    margin-bottom: 12px;
+    color: var(--cor-texto);
+    font-size: 1em;
+    display: flex; align-items: center; gap: 10px;
+}
+.welcome-list li strong { font-weight: bold; }
+
+/* Nota de destaque */
+.welcome-note {
+    background-color: var(--cor-fundo-edicao);
+    border-left: 4px solid var(--cor-switch-ligado);
+    padding: 15px; border-radius: 4px;
+    font-style: italic; color: var(--cor-texto);
+    margin-bottom: 30px;
+}
+
+/* Botão Gigante Principal */
+.btn-large {
+    font-family: var(--fonte-texto);
+    max-width: 500px;
+    padding: 18px; font-size: 1.2em;
+    border-radius: 10px; letter-spacing: 1px;
+    color: var(--cor-fundo);
+    box-shadow: 0 5px 20px var(--cor-brilho-edicao);
+}
+
+/* Links */
+.btn-link {
+    background: none; border: none;
+    color: var(--cor-texto); opacity: 0.7;
+    text-decoration: underline; cursor: pointer;
+    font-family: var(--fonte-texto); font-size: 0.9em;
+    transition: opacity 0.2s;
+}
+.btn-link:hover { opacity: 1; color: var(--cor-switch-ligado); }
+
+/* Botão Perigo (Criar do Zero) */
+.btn-link-danger {
+    background: none; border: none;
+    color: #ff7675; opacity: 0.8;
+    text-decoration: none; cursor: pointer;
+    font-family: var(--fonte-texto); font-size: 0.9em;
+    margin-top: 10px; font-weight: bold;
+    border: 1px dashed #ff7675; padding: 8px 15px; border-radius: 20px;
+    transition: all 0.2s;
+}
+.btn-link-danger:hover { background-color: rgba(255, 118, 117, 0.1); opacity: 1; }
+
+.btn-close-welcome {
+    position: absolute; top: 15px; right: 20px;
+    background: none; border: none;
+    font-size: 2.5em; cursor: pointer; color: var(--cor-texto);
+    opacity: 0.5; transition: opacity 0.2s; line-height: 0.5;
+}
+.btn-close-welcome:hover { opacity: 1; }
+
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+/* ==========================================================================
+   LISTA DE INSTRUÇÕES (ESTILO TABELA)
+   ========================================================================== */
+.welcome-list {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--cor-input-fundo);
+    border: 1px solid var(--cor-input-borda);
+    border-radius: 12px;
+    padding: 0; /* Remove padding padrão da ul */
+    margin: 30px 0;
+    list-style: none;
+    overflow: hidden; /* Para respeitar o border-radius nos filhos */
+}
+
+/* Cada linha da tabela */
+.table-row {
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid var(--cor-input-borda);
+    padding: 15px 20px;
+    gap: 15px;
+    transition: background-color 0.2s;
+}
+
+/* Remove a borda do último item */
+.table-row:last-child {
+    border-bottom: none;
+}
+
+.table-row:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+/* Coluna 1: O comando (negrito/label) */
+.col-label {
+    font-weight: bold;
+    color: var(--cor-texto);
+    min-width: 140px; /* Garante alinhamento visual */
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.95em;
+}
+
+/* Coluna 2: A descrição */
+.col-desc {
+    color: var(--cor-texto);
+    opacity: 0.9;
+    font-size: 0.95em;
+    line-height: 1.4;
+    text-align: left;
+}
+
+/* ==========================================================================
+   BOTÕES RESPONSIVOS
+   ========================================================================== */
+.welcome-actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Padrão Desktop: lado a lado */
+    gap: 20px;
+    align-items: center;
+    padding-top: 30px;
+    border-top: 1px solid var(--cor-input-borda);
+}
+
+/* Alinhamentos Desktop */
+.welcome-actions .btn-large,
+.welcome-actions .btn-secundario {
+    width: 100%;
+    justify-self: center;
+}
+
+/* Links (Baixar Setup e Criar do Zero) centralizados */
+.welcome-actions .btn-link, 
+.welcome-actions .btn-link-danger {
+    justify-self: center;
+    text-align: center;
+}
+
+/* ==========================================================================
+   RESPONSIVIDADE (MEDIA QUERIES)
+   ========================================================================== */
+
+/* Ajustes para Celulares e Tablets pequenos */
+@media (max-width: 768px) {
+    
+    /* 1. Modal ocupa mais espaço na tela do celular */
+    #modal-boas-vindas .welcome-content {
+        padding: 25px;
+        max-height: 85vh; /* Aumenta área visível */
+    }
+
+    #modal-boas-vindas .welcome-title {
+        font-size: 2rem !important; /* Diminui título gigante */
+    }
+
+    /* 2. Lista vira blocos se a tela for muito estreita, ou mantém tabela compacta */
+    .table-row {
+        flex-direction: column; /* Empilha Label e Descrição no celular */
+        align-items: flex-start;
+        gap: 5px;
+    }
+    
+    .col-label {
+        color: var(--cor-switch-ligado); /* Destaque no mobile */
+        margin-bottom: 2px;
+    }
+
+    /* 3. BOTÕES EMPILHADOS (O que você pediu) */
+    .welcome-actions {
+        display: flex; /* Muda de Grid para Flex */
+        flex-direction: column; /* Um abaixo do outro */
+        gap: 15px;
+    }
+
+    .btn-large, 
+    .welcome-actions .btn-secundario {
+        width: 100%; /* Botão ocupa largura total */
+        max-width: none;
+    }
+    
+    /* Garante que os links tenham margem para não colar */
+    .welcome-actions .btn-link {
+        margin-top: 10px;
+    }
+}
