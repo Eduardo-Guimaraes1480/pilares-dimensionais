@@ -1,0 +1,154 @@
+#modal-geral {
+    position: fixed; z-index: 3000;
+    left: 0; top: 0; right: 0; bottom: 0;
+    background-color: rgba(0, 0, 0, 0.7); /* Fundo mais escuro */
+    backdrop-filter: blur(5px); /* Efeito de vidro desfosqueado atrás */
+    display: flex; justify-content: center; align-items: center;
+    padding: 20px; box-sizing: border-box;
+    opacity: 1; transition: opacity 0.3s ease;
+}
+
+.modal-conteudo {
+    background-color: var(--cor-caixa-fundo);
+    padding: 40px; /* Mais espaço interno */
+    border-radius: 16px; /* Bordas mais arredondadas */
+    box-shadow: 0 10px 40px rgba(0,0,0,0.4); /* Sombra mais profunda */
+    width: 100%; max-width: 550px;
+    position: relative; text-align: left;
+    max-height: 85vh; overflow-y: auto;
+    border: 1px solid var(--cor-caixa-borda);
+    
+    /* Animação de entrada suave */
+    animation: slideUp 0.3s ease-out;
+}
+
+@keyframes slideUp {
+    from { transform: translateY(20px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+#modal-fechar {
+    position: absolute; top: 20px; right: 25px;
+    color: var(--cor-texto); font-size: 28px;
+    font-weight: bold; cursor: pointer;
+    opacity: 0.5; transition: opacity 0.2s;
+    line-height: 1;
+}
+#modal-fechar:hover { opacity: 1; color: var(--cor-switch-ligado); }
+
+/* Títulos dentro do Modal */
+#view-content h2, #form-edicao h2 {
+    font-family: var(--fonte-texto);
+    margin-top: 0; margin-bottom: 20px;
+    color: var(--cor-texto);
+    font-size: 1.8em;
+    border-bottom: 2px solid var(--cor-switch-ligado);
+    padding-bottom: 10px;
+    display: inline-block;
+}
+
+/* Campos de Texto (Visualização) */
+#view-content p {
+    font-size: 0.95em;
+    margin-bottom: 15px;
+    color: var(--cor-texto);
+    opacity: 0.9;
+}
+#view-content strong { color: var(--cor-switch-ligado); }
+
+/* Formulário - Grupos */
+.form-grupo { margin-bottom: 20px; position: relative; }
+
+.form-grupo label {
+    display: block; margin-bottom: 8px;
+    font-weight: bold; font-size: 0.9em;
+    color: var(--cor-texto);
+    opacity: 0.8;
+    font-family: var(--fonte-texto);
+}
+
+/* Inputs Modernos */
+.form-grupo input[type="text"], 
+.form-grupo textarea {
+    width: 100%; padding: 12px 15px;
+    border: 2px solid var(--cor-input-borda);
+    border-radius: 8px;
+    background-color: var(--cor-input-fundo);
+    color: var(--cor-texto);
+    font-size: 1em;
+    transition: all 0.3s ease;
+    box-sizing: border-box;
+}
+
+.form-grupo textarea { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+
+.form-grupo input[type="text"]:focus, 
+.form-grupo textarea:focus {
+    border-color: var(--cor-input-foco);
+    box-shadow: 0 0 0 3px var(--cor-brilho-edicao);
+    outline: none;
+}
+
+/* Container de Pais (Checkboxes) */
+.checkbox-container {
+    max-height: 150px; overflow-y: auto;
+    border: 2px solid var(--cor-input-borda);
+    padding: 10px; border-radius: 8px;
+    background-color: var(--cor-input-fundo);
+    display: grid; grid-template-columns: 1fr 1fr; gap: 8px; /* Organiza em 2 colunas */
+}
+.checkbox-item {
+    display: flex; align-items: center; gap: 8px;
+    padding: 5px; border-radius: 4px;
+    cursor: pointer; transition: background 0.2s;
+}
+.checkbox-item:hover { background-color: var(--cor-fundo-edicao); }
+.checkbox-item input { margin: 0; accent-color: var(--cor-switch-ligado); }
+
+/* Área de Imagem */
+#edit-preview-imagem {
+    max-width: 100%; height: 150px;
+    border: 2px dashed var(--cor-input-borda);
+    border-radius: 8px; margin-bottom: 10px;
+    display: block; object-fit: contain;
+    background-color: rgba(0,0,0,0.05);
+}
+
+/* Botões do Formulário */
+.form-botoes {
+    margin-top: 30px; padding-top: 20px;
+    border-top: 1px solid var(--cor-input-borda);
+    display: flex; justify-content: flex-end; gap: 15px;
+}
+
+.form-botoes button {
+    padding: 12px 24px;
+    border-radius: 8px; border: none;
+    color: white; cursor: pointer;
+    font-weight: bold; font-size: 1em;
+    transition: transform 0.2s, filter 0.2s;
+}
+.form-botoes button:active { transform: scale(0.98); }
+
+.btn-salvar {
+    background: #6c5ce7;
+}
+.btn-salvar:hover { filter: brightness(1.1); }
+
+.btn-excluir {
+    background-color: transparent;
+    color: #ff7675 !important;
+    border: 2px solid #ff7675 !important;
+}
+.btn-excluir:hover { background-color: #ff7675; color: white; }
+
+.btn-secundario {
+    width: 100%; padding: 10px;
+    border-radius: 8px;
+    border: 2px solid var(--cor-input-borda);
+    background-color: var(--cor-caixa-fundo);
+    color: var(--cor-texto);
+    cursor: pointer; font-family: var(--fonte-texto);
+    transition: all 0.3s;
+}
+.btn-secundario:hover { border-color: var(--cor-switch-ligado); color: var(--cor-switch-ligado); }

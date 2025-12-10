@@ -10,38 +10,97 @@
 </head>
 <body>
 
-    <header id="main-header">
-        <div class="header-lado-esquerdo">
-            <button id="btn-voltar" class="escondido">&larr; Voltar</button>
-            <button id="btn-criar-conceito" class="escondido">Criar Conceito</button>
+    <div id="overlay" class="escondido"></div>
+
+    <aside id="sidebar">
+        <div class="sidebar-header">
+            <h2>Menu de Controle</h2>
+            <button id="btn-fechar-sidebar">&times;</button>
         </div>
         
-        <div class="header-centro">
-            <h1 id="main-title">Pilares do 'ESE' - 4.0</h1>
+        <div class="sidebar-content">
+            <div class="sidebar-section">
+                <h3>Ações</h3>
+                <button id="btn-voltar" class="btn-sidebar escondido">⬅️ Voltar</button>
+                <button id="btn-criar-conceito" class="btn-sidebar escondido">➕ Criar Conceito</button>
+            </div>
+
+            <hr class="sidebar-divider">
+
+            <div class="sidebar-section">
+                <h3>Dados do Mapa</h3>
+                <p id="nome-arquivo-atual">Seus Pilares Dimensionais</p>
+                <div class="botoes-dados-sidebar">
+                    <button id="btn-exportar" class="btn-sidebar">⬇️ Baixar Backup</button>
+                    <button id="btn-importar" class="btn-sidebar">⬆️ Importar Backup</button>
+                    <input type="file" id="input-importar" accept=".json" style="display: none;">
+                </div>
+            </div>
+
+            <hr class="sidebar-divider">
+
+            <div class="sidebar-section">
+                <h3>Configurações</h3>
+                
+                <div class="config-item">
+                    <span>Tema Escuro</span>
+                    <button id="theme-toggle-btn" class="btn-icon">🌙</button>
+                </div>
+
+                <div class="config-item">
+                    <span>Modo Edição</span>
+                    <div class="modo-edicao-container">
+                        <label class="switch">
+                            <input type="checkbox" id="modo-edicao-toggle">
+                            <span class="slider round"></span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="sidebar-section">
+                    <h3>Sobre</h3>
+                    <a href="sobre.html" class="btn-sidebar" style="text-decoration: none;">📖 Ler Documentação</a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="sidebar-footer">
+            <p>Versão 4.0</p>
+        </div>
+    </aside>
+
+    <div id="welcome-screen" class="escondido">
+        <div class="welcome-container">
+            <h1 style="font-family: 'Paradocx'; font-size: 3em; margin-bottom: 20px;">Bem-vindo ao Mapa ESE</h1>
+            <p>Você ainda não possui um universo criado neste dispositivo.</p>
+            <p style="opacity: 0.7; margin-bottom: 40px;">Utilize o botão abaixo para gerar a estrutura inicial dos Pilares Dimensionais ou importe um backup.</p>
+            
+            <button id="btn-auto-setup" class="btn-salvar" style="font-size: 1.2em; padding: 15px 30px;">🚀 Gerar Universo Padrão</button>
+            
+            <div style="margin-top: 20px;">
+                <button id="btn-welcome-import" class="btn-secundario">📂 Importar de Arquivo</button>
+            </div>
+        </div>
+    </div>
+
+    <header id="main-header">
+        <div class="header-left">
+            <button id="btn-menu-hamburguer">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </button>
+        </div>
+        
+        <div class="header-center">
+            <h1 id="main-title">P I L A R E S - D I M E N S I O N A I S</h1>
             <div class="search-container">
                 <input type="text" id="search-input" placeholder="Pesquisar conceito...">
                 <div id="search-results" class="escondido"></div>
             </div>
         </div>
 
-        <div class="header-lado-direito">
-            <div class="dados-container">
-                <span id="nome-arquivo-atual">Seus Pilares Dimensionais</span>
-                <div class="botoes-dados">
-                    <button id="btn-exportar" title="Baixar Backup">⬇️ Baixar</button>
-                    <button id="btn-importar" title="Importar Arquivo">⬆️ Importar</button>
-                    <input type="file" id="input-importar" accept=".json" style="display: none;">
-                </div>
-            </div>
-            
-            <button id="theme-toggle-btn">🌙</button>
-            <div class="modo-edicao-container">
-                <span>Modo Edição</span>
-                <label class="switch">
-                    <input type="checkbox" id="modo-edicao-toggle">
-                    <span class="slider round"></span>
-                </label>
-            </div>
+        <div class="header-right">
         </div>
     </header>
 
@@ -85,6 +144,6 @@
         </div>
     </div>
 
-    <script src="src/script.js"></script>
+    <script type="module" src="src/js/main.js"></script>
 </body>
 </html>

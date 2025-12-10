@@ -1,0 +1,78 @@
+/* BOTÕES GERAIS */
+.btn-sidebar { width: 100%; padding: 12px; margin-bottom: 10px; text-align: left; background-color: var(--cor-input-fundo); border: 1px solid var(--cor-input-borda); color: var(--cor-texto); border-radius: 8px; cursor: pointer; font-size: 1em; display: flex; align-items: center; gap: 10px; transition: background-color 0.2s; }
+.btn-sidebar:hover { background-color: var(--cor-fundo-edicao); }
+.config-item { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; padding: 5px 0; }
+.btn-icon { background: none; border: 1px solid var(--cor-input-borda); border-radius: 50%; width: 40px; height: 40px; font-size: 1.2em; cursor: pointer; color: var(--cor-texto); }
+#btn-voltar, #btn-criar-conceito, #theme-toggle-btn { padding: 10px 15px; border-radius: 5px; cursor: pointer; font-size: 1em; }
+.escondido { display: none !important; }
+
+a.btn-sidebar{
+    padding: 12px 0px 12px 12px;
+    width: auto;
+}
+
+#btn-criar-conceito{
+    background-color: rgba(0, 255, 85, 0.15);
+    color: white;
+    border:  rgba(0, 255, 85, 0.3) solid 1px;
+}
+#theme-toggle-btn { padding: 0 !important;}
+
+/* PESQUISA */
+.search-container { position: relative; width: 100%; max-width: 500px; margin-top: 5px; }
+#search-input { width: 100%; padding: 10px 15px; border-radius: 25px; border: 1px solid var(--cor-input-borda); background-color: var(--cor-input-fundo); color: var(--cor-texto); font-size: 0.95em; transition: box-shadow 0.3s; }
+#search-input:focus { outline: none; box-shadow: 0 0 0 2px var(--cor-switch-ligado); }
+#search-results { position: absolute; top: 115%; left: 0; width: 100%; background-color: var(--cor-caixa-fundo); border: 1px solid var(--cor-input-borda); border-radius: 12px; box-shadow: 0 10px 25px rgba(0,0,0,0.15); max-height: 300px; overflow-y: auto; text-align: left; z-index: 1100; }
+.search-result-item { padding: 12px 15px; cursor: pointer; border-bottom: 1px solid var(--cor-input-borda); }
+.search-result-item:hover { background-color: var(--cor-fundo-edicao); }
+
+/* QUADRADINHOS (CARDS) */
+.caixa-conceito {
+    background-color: var(--cor-caixa-fundo);
+    border: 2px solid var(--cor-caixa-borda);
+    border-radius: 12px; /* Mais arredondado */
+    padding: 20px; cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    display: flex; flex-direction: column; justify-content: space-between; align-items: center;
+    height: 250px; user-select: none;
+    position: relative; overflow: hidden;
+}
+
+.caixa-conceito:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+    border-color: var(--cor-switch-ligado); /* Borda brilha na cor do tema */
+}
+.caixa-conceito img { max-width: 100px; max-height: 100px; border-radius: 5px; margin: 15px 0; object-fit: cover; }
+.caixa-conceito p.titulo {
+    font-family: var(--fonte-texto);
+    font-size: 1.1rem; margin-bottom: 5px;
+    color: var(--cor-texto);
+    z-index: 2;
+}
+
+.caixa-conceito .subtitulo {
+    font-size: 0.85em; opacity: 0.7;
+    z-index: 2;
+}
+.caixa-conceito.highlight { box-shadow: 0 0 15px 5px #ffeb3b; transform: scale(1.05); }
+body.edit-mode-active .caixa-conceito { cursor: grab; }
+body.edit-mode-active .caixa-conceito:active { cursor: grabbing; }
+.caixa-conceito.sortable-ghost { opacity: 0.4; background: #8A2BE2; }
+
+/* SWITCH */
+.switch { position: relative; display: inline-block; width: 50px; height: 28px; }
+.switch input { opacity: 0; width: 0; height: 0; }
+.slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: var(--cor-switch-desligado); transition: .4s; }
+.slider:before { position: absolute; content: ""; height: 20px; width: 20px; left: 4px; bottom: 4px; background-color: white; transition: .4s; }
+input:checked + .slider { background-color: var(--cor-switch-ligado); }
+input:checked + .slider:before { transform: translateX(22px); }
+.slider.round { border-radius: 34px; }
+.slider.round:before { border-radius: 50%; }
+
+/* SCROLLBAR */
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background-color: var(--cor-switch-desligado); border-radius: 10px; }
+::-webkit-scrollbar-thumb:hover { background-color: var(--cor-switch-ligado); }
+* { scrollbar-width: thin; scrollbar-color: var(--cor-switch-desligado) transparent; }

@@ -1,0 +1,114 @@
+/* GERAL */
+body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: var(--cor-fundo); color: var(--cor-texto); margin: 0; padding: 0; text-align: center; transition: background-color 0.5s ease, color 0.5s ease; position: relative; overflow-x: hidden; }
+body.edit-mode-active::before { content: ''; position: fixed; top: 0; left: 0; right: 0; bottom: 0; box-shadow: inset 0 0 200px 50px var(--cor-brilho-edicao); pointer-events: none; z-index: 900; opacity: 1; transition: opacity 0.5s ease; }
+
+/* HEADER */
+header#main-header { 
+    position: fixed; top: 0; left: 0; width: 100%; height: 100px; 
+    background-color: var(--cor-fundo); color: var(--cor-texto); 
+    padding: 0 20px; box-sizing: border-box; 
+    display: flex; justify-content: space-between; align-items: center; 
+    z-index: 1000; border-bottom: 1px solid var(--cor-input-borda); 
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    /* Adiciona transição suave para quando for empurrado */
+    transition: left 0.3s ease, width 0.3s ease; 
+}
+.header-left, .header-right { width: 60px; display: flex; align-items: center; }
+.header-center { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+h1 { color: var(--cor-header-texto); margin: 0; font-size: 1.5em; cursor: pointer; transition: color 0.3s ease; white-space: nowrap; }
+h1:hover { color: var(--cor-switch-ligado); }
+
+#main-title{
+    font-size: 2rem;
+    font-family: var(--fonte-titulo);
+}
+
+/* SIDEBAR & HAMBURGUER */
+#btn-menu-hamburguer { background: none; border: none; cursor: pointer; padding: 10px; display: flex; flex-direction: column; gap: 5px; }
+#btn-menu-hamburguer .bar { width: 25px; height: 3px; background-color: var(--cor-texto); border-radius: 3px; transition: 0.3s; }
+#btn-menu-hamburguer:hover .bar { background-color: var(--cor-switch-ligado); }
+
+#sidebar { 
+    position: fixed; top: 0; left: 0; width: 300px; height: 100%; 
+    background-color: var(--cor-sidebar-fundo); 
+    box-shadow: 2px 0 15px var(--cor-sidebar-sombra); 
+    z-index: 2000; 
+    transform: translateX(-100%); /* Escondido por padrão */
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1); 
+    display: flex; flex-direction: column; 
+    border-right: 1px solid var(--cor-input-borda);
+}
+
+.sidebar-header { padding: 20px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--cor-input-borda); }
+.sidebar-header h2 { margin: 0; font-size: 1.2em; color: var(--cor-header-texto); }
+#btn-fechar-sidebar { background: none; border: none; font-size: 2em; color: var(--cor-texto); cursor: pointer; line-height: 0.5; }
+.sidebar-content { padding: 20px; flex: 1; overflow-y: auto; text-align: left; }
+.sidebar-section { margin-bottom: 25px; }
+.sidebar-section h3 { margin-top: 0; margin-bottom: 15px; font-size: 0.9em; text-transform: uppercase; color: #888; letter-spacing: 1px; }
+.sidebar-divider { border: 0; border-top: 1px solid var(--cor-input-borda); margin: 10px 0 20px 0; }
+.sidebar-footer { padding: 20px; text-align: center; color: #888; font-size: 0.8em; border-top: 1px solid var(--cor-input-borda); }
+
+/* OVERLAY (Fundo Escuro para Mobile) */
+#overlay { 
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
+    background-color: rgba(0, 0, 0, 0.5); z-index: 1500; 
+    opacity: 0; pointer-events: none; transition: opacity 0.3s; 
+}
+
+/* MAIN CANVAS */
+main#canvas-principal { 
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); 
+    gap: 25px; max-width: 1200px; margin: 0 auto; 
+    padding: 120px 20px 40px 20px; 
+    /* Adiciona transição suave para o empurrão */
+    transition: margin-left 0.3s ease;
+}
+
+#welcome-screen {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background-color: var(--cor-fundo); /* Usa a cor de fundo do tema */
+    z-index: 2000; /* Fica acima de tudo, exceto modal */
+    display: flex; justify-content: center; align-items: center;
+    text-align: center;
+}
+
+.welcome-container {
+    max-width: 600px;
+    padding: 40px;
+    background-color: var(--cor-caixa-fundo);
+    border-radius: 20px;
+    border: 1px solid var(--cor-caixa-borda);
+    box-shadow: 0 20px 50px rgba(0,0,0,0.1);
+}
+
+/* ==========================================================================
+   LÓGICA DE ABERTURA DO MENU (RESPONSIVO)
+   ========================================================================== */
+
+/* Quando o menu está aberto (classe no body) */
+body.menu-aberto #sidebar { transform: translateX(0); }
+
+/* --- COMPORTAMENTO MOBILE (Telas Pequenas) --- */
+/* O menu fica por cima (Overlay), como já era */
+@media (max-width: 767px) {
+    body.menu-aberto #overlay { opacity: 1; pointer-events: auto; }
+}
+
+/* --- COMPORTAMENTO DESKTOP (Telas Grandes > 768px) --- */
+/* O menu EMPURRA o conteúdo (Push) */
+@media (min-width: 768px) {
+    /* Esconde o overlay no desktop pois não vamos cobrir o conteúdo */
+    body.menu-aberto #overlay { display: none; }
+
+    /* Empurra o Header para a direita e ajusta a largura */
+    body.menu-aberto header#main-header {
+        left: 300px;
+        width: calc(100% - 300px);
+    }
+
+    /* Empurra o Conteúdo Principal para a direita */
+    body.menu-aberto main#canvas-principal {
+        margin-left: 300px; /* Cria o espaço exato do sidebar */
+        max-width: none; /* Permite expandir se necessário */
+    }
+}
