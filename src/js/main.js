@@ -46,6 +46,48 @@ document.addEventListener('DOMContentLoaded', () => {
     const btnDownloadSetup = document.getElementById('btn-download-setup');
     const btnIniciarZero = document.getElementById('btn-iniciar-zero'); // NOVO
 
+// Listener para o evento customizado do Breadcrumb (Início)
+    document.addEventListener('reset-navigation', () => {
+        resetHistorico();
+        setCurrentParentId('inicio');
+        atualizarTela();
+    });
+
+    // BUSCA APRIMORADA
+    searchInput.addEventListener('input', (e) => {
+        const query = e.target.value.toLowerCase().trim();
+        if (query.length < 2) { searchResults.classList.add('escondido'); return; }
+        
+        // Filtra buscando em Título, Subtítulo e Definição
+        const filtrados = todosConceitos.filter(c => {
+            if (!c.titulo) return false;
+            const matchTitulo = c.titulo.toLowerCase().includes(query);
+            const matchSub = c.subtitulo && c.subtitulo.toLowerCase().includes(query);
+            const matchDef = c.definicao && c.definicao.toLowerCase().includes(query);
+            
+            // Adiciona uma flag temporária para mostrar na UI onde achou
+            if (matchTitulo) c.matchType = 'Título';
+            else if (matchSub) c.matchType = 'Subtítulo';
+            else if (matchDef) c.matchType = 'Definição';
+            
+            return matchTitulo || matchSub || matchDef;
+        });
+
+        renderizarResultadosPesquisa(filtrados, (id) => {
+            const pais = getPaisDoConceito(id);
+            // Tenta achar o pai mais relevante ou vai pro inicio
+            const paiDestino = pais.length > 0 ? pais[0].id : 'inicio';
+            
+            // Lógica para não bugar o histórico ao pular direto
+            if (currentParentId !== paiDestino) { 
+                pushHistorico(currentParentId); // Salva onde estava antes de pular
+                setCurrentParentId(paiDestino); 
+                atualizarTela(); 
+            }
+            setTimeout(() => highlightConceito(id), 300);
+        });
+    });
+
     // --- INICIALIZAÇÃO INTELIGENTE ---
     async function iniciar() {
         inicializarDragDrop();
@@ -308,103 +350,6 @@ document.addEventListener('DOMContentLoaded', () => {
             atualizarTela();
         }
     });
-
-    // --- Adicione esta função no seu main.js ---
-
-/**
- * Adiciona suporte a Toque Longo (Simula Botão Direito) e Toque Curto (Simula Botão Esquerdo)
- * @param {HTMLElement} elemento - O card do pilar (DOM element)
- * @param {Function} acaoEsquerda - Função que roda no clique esquerdo (Ver filhos)
- * @param {Function} acaoDireita - Função que roda no clique direito (Editar/Detalhes)
- */
-function adicionarToqueMobile(elemento, acaoEsquerda, acaoDireita) {
-    let timerLongPress;
-    let isLongPress = false;
-    let touchMoved = false;
-
-    elemento.addEventListener('touchstart', (e) => {
-        touchMoved = false;
-        isLongPress = false;
-        // Inicia contagem para considerar "Segurar" (500ms)
-        timerLongPress = setTimeout(() => {
-            isLongPress = true;
-            // Toca uma vibraçãozinha se o celular suportar (feedback tátil)
-            if (navigator.vibrate) navigator.vibrate(50); 
-            
-            // Executa a ação de botão DIREITO
-            acaoDireita(e); 
-        }, 500);
-    }, { passive: true });
-
-    elemento.addEventListener('touchmove', () => {
-        touchMoved = true;
-        clearTimeout(timerLongPress); // Se mover o dedo (scrolling), cancela o clique
-    }, { passive: true });
-
-    elemento.addEventListener('touchend', (e) => {
-        clearTimeout(timerLongPress); // Para o timer
-        
-        if (!isLongPress && !touchMoved) {
-            // Se foi rápido e não moveu, é ação de botão ESQUERDO
-            acaoEsquerda(e);
-        }
-    });
-}
-
-// Exemplo de implementação robusta
-let timerLongPress;
-let isLongPress = false;
-
-// Seleciona todos os cards (ajuste o seletor conforme seu HTML)
-const cards = document.querySelectorAll('.conceito'); 
-
-cards.forEach(card => {
-    
-    // 1. O Dedo tocou na tela
-    card.addEventListener('touchstart', (e) => {
-        isLongPress = false;
-        
-        // Inicia o timer de 500ms
-        timerLongPress = setTimeout(() => {
-            isLongPress = true;
-            // AQUI CHAMA SUA FUNÇÃO DE EDITAR/DETALHES
-            // ex: abrirMenuEdicao(card.id); 
-            console.log("Long Press ativado!"); 
-            
-            // Opcional: Vibrar o celular para dar feedback tátil
-            if (navigator.vibrate) navigator.vibrate(50); 
-            
-        }, 500);
-    }, { passive: true });
-
-    // 2. O Dedo moveu (se arrastar a tela, cancela o long press)
-    card.addEventListener('touchmove', () => {
-        clearTimeout(timerLongPress);
-        isLongPress = false; 
-    }, { passive: true });
-
-    // 3. O Dedo saiu da tela
-    card.addEventListener('touchend', (e) => {
-        clearTimeout(timerLongPress); // Cancela o timer se soltar antes de 500ms
-
-        if (isLongPress) {
-            // Se foi long press, previne o clique padrão (navegação)
-            e.preventDefault(); 
-            return;
-        }
-
-        // Se NÃO foi long press, é um clique normal (Toque rápido)
-        // AQUI CHAMA SUA FUNÇÃO DE NAVEGAR/EXPANDIR
-        // ex: navegarPara(card.id);
-        console.log("Toque Rápido (Tap)");
-    });
-
-    // 4. Bloqueia o menu de contexto nativo (o menu de botão direito do navegador)
-    card.addEventListener('contextmenu', (e) => {
-        e.preventDefault();
-        return false;
-    });
-});
 
     // Import/Export
     btnExportar.addEventListener('click', () => {

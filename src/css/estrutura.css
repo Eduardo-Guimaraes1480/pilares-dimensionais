@@ -21,7 +21,6 @@ h1:hover { color: var(--cor-switch-ligado); }
 #main-title{
     font-size: 2rem;
     font-family: var(--fonte-titulo);
-    margin: 5px 0px 0px 40px;
 }
 
 /* SIDEBAR & HAMBURGUER */
@@ -162,3 +161,59 @@ body.menu-aberto #sidebar { transform: translateX(0); }
     }
 }
 /* --- FIM DA RESPONSIVIDADE --- */
+
+/* --- BREADCRUMBS --- */
+.breadcrumbs {
+    display: flex;
+    align-items: center;
+    font-size: 1.1rem;
+    color: var(--cor-texto);
+    opacity: 0.8;
+    overflow-x: auto;
+    white-space: nowrap;
+    padding-bottom: 5px; /* Para scrollbar não colar */
+}
+
+.breadcrumb-item {
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.breadcrumb-item:hover {
+    color: var(--cor-switch-ligado);
+    text-decoration: underline;
+}
+
+.breadcrumb-item.home {
+    font-weight: bold;
+}
+
+.breadcrumb-item.current {
+    font-weight: 600;
+    cursor: default;
+    pointer-events: none; /* O atual não é clicável */
+    color: var(--cor-header-texto);
+}
+
+.breadcrumb-separator {
+    margin: 0 8px;
+    color: #888;
+}
+
+/* Ajuste Mobile para Breadcrumbs */
+@media screen and (max-width: 768px) {
+    #breadcrumbs-wrapper {
+        margin-top: 110px !important; /* Compensa o Header Fixo */
+    }
+    .breadcrumbs {
+        font-size: 0.9rem;
+    }
+}
+
+/* Ajuste na busca para mostrar o subtitulo do match */
+.search-result-item small {
+    color: #888;
+    font-size: 0.8em;
+    display: block;
+    margin-top: 2px;
+}
