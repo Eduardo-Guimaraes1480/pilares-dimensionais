@@ -34,7 +34,8 @@
     --cor-brilho-edicao: rgba(138, 43, 226, 0.25);
     --cor-sidebar-fundo: #ffffff;
     --cor-sidebar-sombra: rgba(0,0,0,0.2);
-
+    --cor-glass-title:  linear-gradient(to bottom, rgba(0, 0, 0, 0.1), rgb(0, 0, 0, 0.3));
+   
     /* Fontes */
     --fonte-titulo: 'Paradocx', serif;
     --fonte-texto: 'JetBrains Mono', monospace;
@@ -54,6 +55,7 @@ body.dark-theme {
     --cor-brilho-edicao: rgba(138, 43, 226, 0.35);
     --cor-sidebar-fundo: #1a1a1a;
     --cor-sidebar-sombra: rgba(0,0,0,0.5);
+    --cor-glass-title:  linear-gradient(to bottom, rgba(255, 255, 255, 0.1), rgb(255, 255, 255, 0.3));
 }
 
 /* Previne estouro horizontal geral */
